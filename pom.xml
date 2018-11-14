@@ -109,6 +109,13 @@
       <version>${logback.version}</version>
     </dependency>
 
+    <!-- Step 5 -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.197</version>
+    </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>junit</groupId>

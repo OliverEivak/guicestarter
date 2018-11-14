@@ -3,10 +3,11 @@ package com.olivereivak.starter;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.olivereivak.starter.guice.modules.AppModule;
+import com.olivereivak.starter.guice.modules.h2.H2Module;
 import com.olivereivak.starter.guice.modules.logging.LoggingModule;
+import com.olivereivak.starter.guice.modules.resteasy.RestModule;
 import com.olivereivak.starter.guice.modules.web.WebModule;
 import com.olivereivak.starter.guice.modules.web.WebServer;
-import com.olivereivak.starter.guice.modules.resteasy.RestModule;
 import org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener;
 
 /**
@@ -19,6 +20,7 @@ public class App {
 				new LoggingModule(),
 				new WebModule(),
 				new RestModule(),
+				new H2Module(),
 				new AppModule()
 		);
 
