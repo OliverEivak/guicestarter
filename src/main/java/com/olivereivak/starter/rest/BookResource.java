@@ -1,10 +1,12 @@
 package com.olivereivak.starter.rest;
 
-import com.olivereivak.starter.BookService;
+import com.olivereivak.starter.service.BookService;
 import com.olivereivak.starter.model.Book;
+import com.olivereivak.starter.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,7 +16,7 @@ import java.util.List;
 
 @Path("/books")
 @Produces("application/json")
-public class BookResource {
+public class BookResource extends BaseResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BookResource.class);
 
@@ -33,6 +35,16 @@ public class BookResource {
 //				.setUser(1L));
 
 		return bookService.findAll();
+	}
+
+	@GET
+	@Path("/my")
+	@RolesAllowed("USER")
+	public List<Book> findByUser() {
+		User user = getUser();
+		LOGGER.debug("Getting books for user " + user);
+
+		return bookService.findByUser(user.getId());
 	}
 
 	@POST

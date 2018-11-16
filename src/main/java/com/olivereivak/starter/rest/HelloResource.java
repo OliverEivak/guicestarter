@@ -39,7 +39,6 @@ public class HelloResource {
                 stmt.executeUpdate(schemaSql);
                 stmt.executeUpdate(dataSql);
             }
-
         }
 
         LOGGER.info("Database initialized!");

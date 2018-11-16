@@ -8,13 +8,17 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 
 import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WebServer {
 
 	private Server server;
 
 	private List<EventListener> eventListeners = new ArrayList<>();
+
+	private Map<String, String> initParameters = new HashMap<>();
 
 	public void start() throws Exception {
 		server = new Server(9090);
@@ -23,6 +27,8 @@ public class WebServer {
 		sch.addFilter(GuiceFilter.class, "/*", null);
 		// Must add DefaultServlet for embedded Jetty. Failing to do this will cause 404 errors.
 		sch.addServlet(DefaultServlet.class, "/");
+
+		initParameters.forEach(sch::setInitParameter);
 
 		for (EventListener eventListener : eventListeners) {
 			sch.addEventListener(eventListener);
@@ -49,6 +55,11 @@ public class WebServer {
 
 	public WebServer addEventListener(EventListener eventListener) {
 		eventListeners.add(eventListener);
+		return this;
+	}
+
+	public WebServer addInitParameter(String name, String value) {
+		initParameters.put(name, value);
 		return this;
 	}
 

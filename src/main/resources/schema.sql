@@ -15,7 +15,8 @@ CREATE TABLE user (
   id               BIGINT AUTO_INCREMENT PRIMARY KEY,
   username         VARCHAR(32)       UNIQUE NOT NULL,
   password         TINYBLOB,
-  email            VARCHAR(255)
+  email            VARCHAR(255),
+  role             VARCHAR(255)              NOT NULL
 );
 
 CREATE TABLE authentication (

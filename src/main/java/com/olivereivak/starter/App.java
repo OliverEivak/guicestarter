@@ -2,6 +2,7 @@ package com.olivereivak.starter;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.olivereivak.starter.guice.GuiceInjector;
 import com.olivereivak.starter.guice.modules.AppModule;
 import com.olivereivak.starter.guice.modules.h2.H2Module;
 import com.olivereivak.starter.guice.modules.logging.LoggingModule;
@@ -26,7 +27,11 @@ public class App {
 
 		injector.getInstance(WebServer.class)
 				.addEventListener(injector.getInstance(GuiceResteasyBootstrapServletContextListener.class))
+				.addInitParameter("resteasy.role.based.security", "true")
+				.addInitParameter("resteasy.providers", "com.olivereivak.starter.rest.filter.AuthenticationFilter")
 				.start();
+
+		GuiceInjector.setInjector(injector);
 	}
 
 }

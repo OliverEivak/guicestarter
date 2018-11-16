@@ -51,4 +51,32 @@ public class BookDao {
         }
     }
 
+	public List<Book> findByUser(Long user) throws SQLException {
+		List<Book> books = new ArrayList<>();
+
+		try (Connection connection = connectionProvider.get()) {
+			try (PreparedStatement stmt = connection.prepareStatement("select * from book where user = ?")) {
+				stmt.setLong(1, user);
+
+				ResultSet rs = stmt.executeQuery();
+
+				while (rs.next()) {
+					Book book = mapBook(rs);
+					books.add(book);
+				}
+			}
+		}
+
+		return books;
+	}
+
+	private Book mapBook(ResultSet rs) throws SQLException {
+		return new Book()
+				.setId(rs.getLong("id"))
+				.setTitle(rs.getString("title"))
+				.setAuthor(rs.getString("author"))
+				.setRead(rs.getBoolean("read"))
+				.setUser(rs.getLong("user"));
+	}
+
 }

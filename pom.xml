@@ -116,6 +116,13 @@
       <version>1.4.197</version>
     </dependency>
 
+    <!-- Step 6 -->
+    <dependency>
+      <groupId>org.mindrot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>0.3m</version>
+    </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>junit</groupId>
