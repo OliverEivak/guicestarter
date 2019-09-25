@@ -3,6 +3,7 @@ package com.olivereivak.starter.service;
 import com.olivereivak.starter.dao.AuthenticationDao;
 import com.olivereivak.starter.dao.UserDao;
 import com.olivereivak.starter.model.Authentication;
+import com.olivereivak.starter.model.Role;
 import com.olivereivak.starter.model.User;
 import com.olivereivak.starter.model.rest.AuthenticationResult;
 import com.olivereivak.starter.model.rest.RegistrationRequest;
@@ -30,7 +31,8 @@ public class UserService {
 		User user = new User()
 				.setUsername(registrationRequest.getUsername())
 				.setPassword(BCrypt.hashpw(registrationRequest.getPassword(), BCrypt.gensalt()).getBytes())
-				.setEmail(registrationRequest.getEmail());
+				.setEmail(registrationRequest.getEmail())
+				.setRole(Role.USER);
 		userDao.createUser(user);
 
 		return login(registrationRequest.getUsername(), registrationRequest.getPassword());
