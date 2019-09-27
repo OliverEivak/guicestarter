@@ -59,11 +59,11 @@ public class UserDao {
 
 	public void createUser(User user) {
 		try (Connection connection = connectionProvider.get()) {
-			try (PreparedStatement stmt = connection.prepareStatement("insert into user (username, password. email, role) values (?,?)")) {
+			try (PreparedStatement stmt = connection.prepareStatement("insert into user (username, password, email, role) values (?,?,?,?)")) {
 				stmt.setString(1, user.getUsername());
 				stmt.setBytes(2, user.getPassword());
 				stmt.setString(3, user.getEmail());
-				stmt.setString(3, user.getRole().toString());
+				stmt.setString(4, user.getRole().toString());
 
 				stmt.execute();
 			}
