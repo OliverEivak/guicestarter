@@ -1,0 +1,36 @@
+/**
+ * Problems:
+ *
+ * Compiling in IDEA:
+ * java: java.lang.module.ResolutionException: Modules jsr305 and java.annotation export package javax.annotation to module j2objc.annotations
+ * https://blog.codefx.org/java/jsr-305-java-9/
+ *
+ * Running jdeps --class-path 'libs/*' -recursive target/guice-starter-1.0-SNAPSHOT.jar
+ * Exception in thread "main" java.lang.module.FindException: Module beta.jboss.jaxrs.api_2_1 not found, required by com.olivereivak.starter
+ */
+module com.olivereivak.starter {
+
+    // TODO: problematic
+    requires beta.jboss.jaxrs.api_2_1;
+
+//    requires jaxrs.api;
+//    requires java.ws.rs;
+
+    requires commons.io;
+    requires com.fasterxml.jackson.databind;
+    requires com.google.common;
+    requires com.google.guice;
+    requires com.google.guice.extensions.servlet;
+    requires java.annotation;
+    requires java.sql;
+    requires javax.inject;
+    requires jbcrypt;
+    requires jetty.server;
+    requires jetty.servlet;
+    requires jul.to.slf4j;
+    requires logback.classic;
+    requires resteasy.core;
+    requires resteasy.guice;
+    requires slf4j.api;
+
+}

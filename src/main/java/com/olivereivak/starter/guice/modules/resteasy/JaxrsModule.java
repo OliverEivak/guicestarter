@@ -2,7 +2,7 @@ package com.olivereivak.starter.guice.modules.resteasy;
 
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.ServletModule;
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.jboss.resteasy.core.ResteasyContext;
 
 import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
@@ -45,7 +45,7 @@ public class JaxrsModule extends ServletModule {
 
 		@Override
 		public T get() {
-			return ResteasyProviderFactory.getContextData(instanceClass);
+			return ResteasyContext.getContextData(instanceClass);
 		}
 	}
 }

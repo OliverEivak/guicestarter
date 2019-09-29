@@ -28,6 +28,12 @@ public class HelloResource {
 		return "Hello restful world!";
 	}
 
+    @GET
+    @Path("/java11")
+    public String java11() {
+        return "".isBlank() ? "Hello Java 11!" : "";
+    }
+
 	@GET
     @Path("/init")
 	public String initDatabase() throws SQLException, IOException {
